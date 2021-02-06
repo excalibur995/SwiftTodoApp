@@ -9,25 +9,17 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
     
-    var itemArray = ["Find Mike", "Buy Eggos", "Destroy Demogorgon"];
+    var itemArray:[TodoItem] = []
+
     let userDefaults = UserDefaults.standard;
-    static let itemArrayKey = "RNmu5D89VWsKtZvmKkfgxfEaekcvBnWkRAhKHftG"
-    
-    var localStorage:[String]? {
-        get {
-            userDefaults.array(forKey: TodoListViewController.itemArrayKey) as? [String]
-        }
-        set {
-            userDefaults.setValue(newValue, forKey: TodoListViewController.itemArrayKey);
-        }
-    }
+    let encoder = PropertyListEncoder()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        reloadDataFromLocal()
+    
+        retrievedataFromLocal()
         // Do any additional setup after loading the view.
     }
     
@@ -39,36 +31,57 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath);
-        cell.textLabel?.text = itemArray[indexPath.row];
+        let todoItems = itemArray[indexPath.row]
+        
+        cell.textLabel?.text = todoItems.title
+        cell.selectionStyle = .none
+        cell.accessoryType = todoItems.done ? .checkmark : .none
+        
         return cell
     }
     
     //MARK - Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        handleTap(at: indexPath);
+        handleTap(at: indexPath)
     }
     
     
     //MARK - function
-    
-    func reloadDataFromLocal() {
-        if localStorage != nil && localStorage!.count > 0 {
-            itemArray = localStorage!
-        }
-    }
+
     
     func handleTap(at indexPath:IndexPath) {
-        if  tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-      
+       
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        self.saveDataToLocal()
+        self.tableView.reloadData()
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     //Mark - Add new Items
+    
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         showAlert();
+    }
+    
+    func saveDataToLocal() {
+        do {
+            let data = try encoder.encode(self.itemArray);
+            try data.write(to: dataFilePath!);
+        } catch  {
+            print("error encode")
+        }
+    }
+    
+    func retrievedataFromLocal() {
+        if let retrieveData = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder();
+            do {
+                itemArray = try decoder.decode([TodoItem].self, from: retrieveData)
+                
+            } catch  {
+                print("error parsing")
+            }
+        }
     }
     
     func showAlert() {
@@ -86,8 +99,9 @@ class TodoListViewController: UITableViewController {
         
         let addAction = UIAlertAction(title: "Add item", style: .default) { (_) in
             if(!alertTextField.text!.isEmpty) {
-                self.itemArray.append(alertTextField.text!)
-                self.localStorage = self.itemArray
+                let newItem = TodoItem(title: alertTextField.text!, done: false)
+                self.itemArray.append(newItem)
+                self.saveDataToLocal()
                 self.tableView.reloadData()
             }
         }
