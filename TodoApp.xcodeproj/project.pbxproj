@@ -13,6 +13,7 @@
 		C0DFC74A25CEB9D80073E358 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0DFC74825CEB9D80073E358 /* Main.storyboard */; };
 		C0DFC74C25CEB9D90073E358 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DFC74B25CEB9D90073E358 /* Assets.xcassets */; };
 		C0DFC74F25CEB9D90073E358 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0DFC74D25CEB9D90073E358 /* LaunchScreen.storyboard */; };
+		C0DFC76025CEDB140073E358 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DFC75F25CEDB140073E358 /* TodoItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		C0DFC74B25CEB9D90073E358 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0DFC74E25CEB9D90073E358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0DFC75025CEB9D90073E358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0DFC75F25CEDB140073E358 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,48 @@
 		C0DFC74125CEB9D80073E358 /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				C0DFC75D25CEDAE40073E358 /* Supporting Files */,
+				C0DFC75C25CEDABF0073E358 /* Views */,
+				C0DFC75B25CEDAB10073E358 /* Controllers */,
+				C0DFC75A25CEDAA10073E358 /* Model */,
 				C0DFC74225CEB9D80073E358 /* AppDelegate.swift */,
 				C0DFC74425CEB9D80073E358 /* SceneDelegate.swift */,
-				C0DFC74625CEB9D80073E358 /* TodoListViewController.swift */,
-				C0DFC74825CEB9D80073E358 /* Main.storyboard */,
-				C0DFC74B25CEB9D90073E358 /* Assets.xcassets */,
-				C0DFC74D25CEB9D90073E358 /* LaunchScreen.storyboard */,
 				C0DFC75025CEB9D90073E358 /* Info.plist */,
 			);
 			path = TodoApp;
+			sourceTree = "<group>";
+		};
+		C0DFC75A25CEDAA10073E358 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0DFC75F25CEDB140073E358 /* TodoItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C0DFC75B25CEDAB10073E358 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C0DFC74625CEB9D80073E358 /* TodoListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C0DFC75C25CEDABF0073E358 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0DFC74825CEB9D80073E358 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C0DFC75D25CEDAE40073E358 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C0DFC74B25CEB9D90073E358 /* Assets.xcassets */,
+				C0DFC74D25CEB9D90073E358 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +174,7 @@
 			files = (
 				C0DFC74725CEB9D80073E358 /* TodoListViewController.swift in Sources */,
 				C0DFC74325CEB9D80073E358 /* AppDelegate.swift in Sources */,
+				C0DFC76025CEDB140073E358 /* TodoItem.swift in Sources */,
 				C0DFC74525CEB9D80073E358 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,11 +325,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46VSX45NAK;
 				INFOPLIST_FILE = TodoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = raihanalbazzy.TodoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = raihanalbazzy.TodoAppSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -308,11 +345,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46VSX45NAK;
 				INFOPLIST_FILE = TodoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = raihanalbazzy.TodoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = raihanalbazzy.TodoAppSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
